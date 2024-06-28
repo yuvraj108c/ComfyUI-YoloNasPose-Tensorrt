@@ -102,15 +102,20 @@ class YoloNasPoseTensorrt:
                 result = show_predictions_from_batch_format(predictions)
             except Exception as e:
                 result = black_image
-            
+
             pose_frames.append(result)
             pbar.update(1)
 
         pose_frames_np = np.array(pose_frames).astype(np.float32) / 255.0
-        pose_frames_t = torch.from_numpy(pose_frames_np) 
-        pose_frames_t_resized = F.interpolate(pose_frames_t, size=(images.shape[2], images.shape[3]), mode='bilinear', align_corners=False)
-        
-        return (pose_frames_t_resized, )
+        pose_frames_tensor = torch.from_numpy(pose_frames_np)
+
+        resized_pose_frames_tensor = torch.nn.functional.interpolate(
+            # (B, H, W, C) -> (B, C, H, W)
+            pose_frames_tensor.permute(0, 3, 1, 2),
+            size=(images_bchw.shape[2], images_bchw.shape[3]),
+            mode='bilinear'
+        ).permute(0, 2, 3, 1)  # (B, C, H, W) -> (B, H, W, C)
+        return (resized_pose_frames_tensor,)
 
 
 NODE_CLASS_MAPPINGS = {

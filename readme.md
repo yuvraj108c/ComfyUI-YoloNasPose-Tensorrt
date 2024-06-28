@@ -25,10 +25,12 @@ This repo provides a ComfyUI Custom Node implementation of [YOLO-NAS-POSE](https
 
 ## ⏱️ Performance
 
-| Device |      Model      | Precision | Model Input (WxH) | Image Resolution (WxH) | FPS  |
-| :----: | :-------------: | :-------: | :---------------: | :--------------------: | ---- |
-|  H100  | YOLO-NAS-POSE-L |   FP32    |      640x640      |        1280x720        | 100+ |
-|  H100  | YOLO-NAS-POSE-L |   FP16    |      640x640      |        1280x720        | 100+ |
+_The benchmarks were performed on 1225 frames_
+
+| Device |      Model      | Precision | Model Input (WxH) | Image Resolution (WxH) | FPS |
+| :----: | :-------------: | :-------: | :---------------: | :--------------------: | --- |
+|  H100  | YOLO-NAS-POSE-L |   FP32    |      640x640      |        1280x720        | 113 |
+|  H100  | YOLO-NAS-POSE-L |   FP16    |      640x640      |        1280x720        | 125 |
 
 ## 🚀 Installation
 
