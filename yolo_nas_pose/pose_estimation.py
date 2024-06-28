@@ -82,7 +82,7 @@ def draw_skeleton(
         x = int(x)
         y = int(y)
         color = tuple(map(int, color))
-        cv2.circle(overlay, center=(x, y), radius=keypoint_radius,
+        cv2.circle(overlay, center=(x, y), radius=8,
                    color=color, thickness=-1, lineType=cv2.LINE_AA)
 
         # Draw confidence score for each keypoint individually
@@ -113,7 +113,7 @@ def draw_skeleton(
             p2 = tuple(map(int, keypoints[kp2]))
             color = tuple(map(int, color))
             cv2.line(overlay, p1, p2, color=color,
-                     thickness=joint_thickness, lineType=cv2.LINE_AA)
+                     thickness=10, lineType=cv2.LINE_AA)
 
     confident_keypoints = keypoints[keypoints_to_show_mask]
 

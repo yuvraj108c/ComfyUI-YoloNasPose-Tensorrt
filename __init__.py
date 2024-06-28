@@ -6,6 +6,7 @@ import torch
 from comfy.utils import ProgressBar
 from .utilities import Engine
 from .yolo_nas_pose.pose_estimation import PoseVisualization
+import cv2
 
 ENGINE_DIR = os.path.join(folder_paths.models_dir,
                           "tensorrt", "yolo-nas-pose")
@@ -53,7 +54,7 @@ def show_predictions_from_batch_format(predictions):
 
     image = PoseVisualization.draw_poses(
         image=black_image, poses=new_pred_joints, scores=None, boxes=None,
-        edge_links=edge_links, edge_colors=edge_colors, keypoint_colors=None, is_crowd=None, joint_thickness=5, box_thickness=2, keypoint_radius=5
+        edge_links=edge_links, edge_colors=edge_colors, keypoint_colors=None, is_crowd=None, joint_thickness=10, box_thickness=2, keypoint_radius=10  # ovewritten in function
     )
     return image
 
@@ -103,10 +104,12 @@ class YoloNasPoseTensorrt:
             except Exception as e:
                 result = black_image
 
+            result = (result.clip(0, 255)).astype(np.uint8)
+            result = cv2.cvtColor(result, cv2.COLOR_BGR2RGB)
             pose_frames.append(result)
             pbar.update(1)
 
-        pose_frames_np = np.array(pose_frames).astype(np.float32) / 255.0
+        pose_frames_np = np.array(pose_frames).astype(np.float32) / 255
         pose_frames_tensor = torch.from_numpy(pose_frames_np)
 
         resized_pose_frames_tensor = torch.nn.functional.interpolate(
