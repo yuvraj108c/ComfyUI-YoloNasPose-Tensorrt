@@ -10,7 +10,7 @@
 </div>
 
 <p align="center">
-  <img src="assets/demo.gif" />
+  <img src="assets/demo.PNG" />
 </p>
 
 This project is licensed under [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/), everyone is FREE to access, use, modify and redistribute with the same license.
@@ -29,8 +29,8 @@ _The benchmarks were performed on 1225 frames_
 
 | Device |      Model      | Precision | Model Input (WxH) | Image Resolution (WxH) | FPS |
 | :----: | :-------------: | :-------: | :---------------: | :--------------------: | --- |
-|  H100  | YOLO-NAS-POSE-L |   FP32    |      640x640      |        1280x720        | 113 |
-|  H100  | YOLO-NAS-POSE-L |   FP16    |      640x640      |        1280x720        | 125 |
+|  H100  | YOLO-NAS-POSE-L |   FP32    |      640x640      |        1280x720        | 105 |
+|  H100  | YOLO-NAS-POSE-L |   FP16    |      640x640      |        1280x720        | 115 |
 
 ## 🚀 Installation
 

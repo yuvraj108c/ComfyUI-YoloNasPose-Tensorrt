@@ -106,6 +106,7 @@ class YoloNasPoseTensorrt:
 
             result = (result.clip(0, 255)).astype(np.uint8)
             result = cv2.cvtColor(result, cv2.COLOR_BGR2RGB)
+            # result = cv2.resize(result, (images_bchw.shape[3], images_bchw.shape[2])) # quite slow
             pose_frames.append(result)
             pbar.update(1)
 
