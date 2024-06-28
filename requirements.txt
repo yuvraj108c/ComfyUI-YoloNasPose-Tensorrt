@@ -1,0 +1,4 @@
+tensorrt
+opencv-python
+polygraphy
+matplotlib
