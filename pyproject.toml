@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-yolonaspose-tensorrt"
+description = "This repo provides a ComfyUI Custom Node implementation of [a/YOLO-NAS-POSE](https://github.com/Deci-AI/super-gradients), powered by TensorRT for ultra fast pose estimation. It has been adapted to work with openpose controlnet (experimental)"
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["tensorrt", "opencv-python", "polygraphy", "matplotlib"]
+
+[project.urls]
+Repository = "https://github.com/yuvraj108c/ComfyUI-YoloNasPose-Tensorrt"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-YoloNasPose-Tensorrt"
+Icon = ""
