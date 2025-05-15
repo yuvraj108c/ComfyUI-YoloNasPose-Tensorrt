@@ -7,6 +7,7 @@ from comfy.utils import ProgressBar
 from .utilities import Engine
 from .yolo_nas_pose.pose_estimation import PoseVisualization
 import cv2
+from .engine_builder_node import YoloNasPoseEngineBuilder
 
 ENGINE_DIR = os.path.join(folder_paths.models_dir,
                           "tensorrt", "yolo-nas-pose")
@@ -62,10 +63,14 @@ def show_predictions_from_batch_format(predictions):
 class YoloNasPoseTensorrt:
     @classmethod
     def INPUT_TYPES(s):
+        try:
+            engines = os.listdir(ENGINE_DIR)
+        except FileNotFoundError:
+            engines = []
         return {
             "required": {
                 "images": ("IMAGE",),
-                "engine": (os.listdir(ENGINE_DIR),),
+                "engine": (engines,),
             }
         }
     RETURN_NAMES = ("IMAGE",)
@@ -124,10 +129,12 @@ class YoloNasPoseTensorrt:
 
 NODE_CLASS_MAPPINGS = {
     "YoloNasPoseTensorrt": YoloNasPoseTensorrt,
+    "YoloNasPoseEngineBuilder": YoloNasPoseEngineBuilder,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "YoloNasPoseTensorrt": "Yolo Nas Pose Tensorrt",
+    "YoloNasPoseEngineBuilder": "Yolo Nas Pose Engine Builder",
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']

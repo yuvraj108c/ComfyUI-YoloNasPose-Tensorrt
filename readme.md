@@ -42,8 +42,19 @@ cd ./ComfyUI-YoloNasPose-Tensorrt
 pip install -r requirements.txt
 ```
 
-## 🛠️ Building Tensorrt Engine
+## 🛠️ Building TensorRT Engine
 
+There are two ways to build TensorRT engines:
+
+### Method 1: Using the EngineBuilder Node
+1. Insert node by `Right Click -> tensorrt -> Yolo Nas Pose Engine Builder`
+2. Select the model size (small, medium, or large)
+3. Optionally customize the engine name, FP16 settings, and onnx path
+4. Run the workflow to build the engine
+
+The engine will be automatically downloaded and built in the specified location. Refresh the webpage or strike 'r' on your keyboard, and the new engine will appear in the Yolo Nas Pose Tensorrt node.
+
+### Method 2: Manual Building
 1. Download one of the available [onnx models](https://huggingface.co/yuvraj108c/yolo-nas-pose-onnx/tree/main). The number at the end represents the confidence threshold for pose detection _(e.g yolo_nas_pose_l_0.5.onnx)_
 2. Edit model paths inside [export_trt.py](export_trt.py) accordingly and run `python export_trt.py`
 3. Place the exported tensorrt engine inside ComfyUI `/models/tensorrt/yolo-nas-pose` directory

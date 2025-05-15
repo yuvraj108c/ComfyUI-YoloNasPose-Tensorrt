@@ -1,7 +1,10 @@
 import torch
 import time
-from utilities import Engine
 
+try:
+    from .utilities import Engine
+except ImportError:
+    from utilities import Engine
 
 def export_trt(trt_path: str, onnx_path: str, use_fp16: bool):
     engine = Engine(trt_path)
@@ -20,5 +23,6 @@ def export_trt(trt_path: str, onnx_path: str, use_fp16: bool):
     return ret
 
 
-export_trt(trt_path="./yolo_nas_pose_l.engine",
-           onnx_path="./yolo_nas_pose_l.onnx", use_fp16=True)
+if __name__ == "__main__":
+    export_trt(trt_path="./yolo_nas_pose_l.engine",
+               onnx_path="./yolo_nas_pose_l.onnx", use_fp16=True)
